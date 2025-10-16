@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion - Plateforme</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-light: #4895ef;
+            --secondary: #3f37c9;
+            --dark: #2b2d42;
+            --light: #f8f9fa;
+            --gray: #adb5bd;
+            --success: #4cc9f0;
+            --error: #e63946;
+        }{}
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background:rgba(0, 0, 0, 0.2) ;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 450px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .logo h1 {
+            color: white;
+            font-weight: 600;
+            font-size: 28px;
+            letter-spacing: 1px;
+        }
+        
+        .form-container {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 16px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+        
+        .form-container:hover {
+            transform: translateY(-5px);
+        }
+        
+        h2 {
+            text-align: center;
+            color: var(--dark);
+            margin-bottom: 30px;
+            font-weight: 600;
+            font-size: 24px;
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--dark);
+            font-weight: 500;
+            font-size: 14px;
+        }
+        
+        .input-group input, .input-group select {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s;
+            background-color: #f8f9fa;
+        }
+        
+        .input-group input:focus, .input-group select:focus {
+            border-color: var(--primary);
+            background-color: white;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+        }
+        
+        .input-group i {
+            position: absolute;
+            right: 16px;
+            top: 42px;
+            color: var(--gray);
+        }
+        
+        button {
+            width: 100%;
+            padding: 14px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+        
+        button:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.4);
+        }
+        
+        .links {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        
+        .links button {
+            width: auto;
+            background: transparent;
+            color: var(--primary);
+            font-weight: 500;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .links button:hover {
+            background: transparent;
+            color: var(--secondary);
+            transform: none;
+            box-shadow: none;
+            text-decoration: underline;
+        }
+        
+        .error {
+            color: var(--error);
+            font-size: 14px;
+            text-align: center;
+            margin-top: 15px;
+            min-height: 20px;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 14px;
+        }
+        
+        @media (max-width: 480px) {
+            .form-container {
+                padding: 30px 20px;
+            }
+            
+            .links {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .links button {
+                width: 100%;
+                text-align: center;
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <h1>Inscrivez vous</h1>
+        </div>
+        
+        <div class="form-container">
+            <!-- Section de connexion -->
+            <div id="loginSection">
+                <h2>Connexion</h2>
+                <div class="input-group">
+                    <label for="email">Adresse e-mail</label>
+                    <input type="email" id="email" >
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <div class="input-group">
+                    <label for="password">Mot de passe</label>
+                    <input type="password" id="password" >
+                    <i class="fas fa-lock"></i>
+                </div>
+                <button onclick="login()" class="connecter">Se connecter</button>
+                <p class="error" id="loginError"></p>
+                <div class="links">
+                    <button onclick="showForgotPassword()">Mot de passe oublié ?</button>
+                    <button onclick="showRegister()">Créer un compte</button>
+                </div>
+            </div>
+            
+            <!-- Section d'inscription -->
+            <div id="registerSection" class="hidden">
+                <h2>Inscription</h2>
+                <div class="input-group">
+                    <label for="regUsername">Nom d'utilisateur</label>
+                    <input type="text" id="regUsername" placeholder="Votre nom d'utilisateur">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="input-group">
+                    <label for="regEmail">Adresse e-mail</label>
+                    <input type="email" id="regEmail" placeholder="votre@email.com">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <div class="input-group">
+                    <label for="regPassword">Mot de passe</label>
+                    <input type="password" id="regPassword" placeholder="Créez un mot de passe sécurisé">
+                    <i class="fas fa-lock"></i>
+                </div>
+                <div class="input-group">
+                    <label for="regRole">Rôle</label>
+                    <select id="regRole">
+                        <option value="user">Utilisateur</option>
+                        <option value="admin">Administrateur</option>
+                    </select>
+                </div>
+                <button onclick="register()">S'inscrire</button>
+                <p class="error" id="registerError"></p>
+                <div class="links">
+                    <button onclick="showLogin()">Retour à la connexion</button>
+                </div>
+            </div>
+            
+            <!-- Section mot de passe oublié -->
+            <div id="forgotPasswordSection" class="hidden">
+                <h2>Mot de passe oublié</h2>
+                <div class="input-group">
+                    <label for="forgotEmail">Adresse e-mail</label>
+                    <input type="email" id="forgotEmail" placeholder="votre@email.com">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <button onclick="forgotPassword()">Envoyer le code de réinitialisation</button>
+                <p class="error" id="forgotError"></p>
+                <div class="links">
+                    <button onclick="showLogin()">Retour à la connexion</button>
+                </div>
+            </div>
+            
+            <!-- Section réinitialisation du mot de passe -->
+            <div id="resetPasswordSection" class="hidden">
+                <h2>Réinitialiser le mot de passe</h2>
+                <div class="input-group">
+                    <label for="resetEmail">Adresse e-mail</label>
+                    <input type="email" id="resetEmail" placeholder="votre@email.com">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <div class="input-group">
+                    <label for="resetToken">Code de réinitialisation</label>
+                    <input type="text" id="resetToken" placeholder="Code reçu par email">
+                    <i class="fas fa-key"></i>
+                </div>
+                <div class="input-group">
+                    <label for="resetPassword">Nouveau mot de passe</label>
+                    <input type="password" id="resetPassword" placeholder="Nouveau mot de passe">
+                    <i class="fas fa-lock"></i>
+                </div>
+                <button onclick="resetPassword()">Réinitialiser le mot de passe</button>
+                <p class="error" id="resetError"></p>
+                <div class="links">
+                    <button onclick="showLogin()">Retour à la connexion</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>&copy; by Kiady 2025. Tous droits réservés.</p>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
